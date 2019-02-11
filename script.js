@@ -14,8 +14,8 @@ import axios from 'axios';
 let getBeer = async () => {
   try {
     let importBeer = await axios.get('https://api.punkapi.com/v2/beers')
-    return importBeer;
-    console.log(importBeer);
+    console.log("control getBeer");
+    return importBeer.data;
   } catch (error) {
     console.error(error);
   }
@@ -23,22 +23,26 @@ let getBeer = async () => {
 
 let addBeer = async () => {
   let beerBatch = await getBeer();
-  console.log(beerBatch);
-  let beerBox = document.querySelector(".beerCase");
-  for (let i = 0 ;  i < beerBatch.data.length ; i++){
-    console.log("loop control");
+  let beerBox = document.getElementById("beerCase");
+  for (let i = 0 ;  i < 5 ; i++){
+    //create beerItem and its children
     let beerItem = document.createElement("div");
     beerItem.setAttribute("class", "beerTag");
-    beerBox.appendChild("beerItem");
     let beerName = document.createElement("h5");
-    beerName.innerText = "beerBatch.data.name[i]"; // fill with name from api
+    beerName.innerText = beerBatch[i].name; // fill with name from api
     let beerTagLine = document.createElement ("p");
-    beerTagLine.innerText = "beerBatch.data.tagline[i]"; // fill with tagline from api
+    beerTagLine.innerText = beerBatch[i].tagline; // fill with tagline from api
     let beerDate =  document.createElement("p");
-    beerDate.innerText = "beerBatch.data.first_brewed[i]"; // fill with first_brewed from api
+    beerDate.innerText = beerBatch[i].first_brewed; // fill with first_brewed from api
     let beerImg =  document.createElement("img");
-    beerImg.setAttribute("src", "beerBatch.data.image_url[i]"); //fill with image_url from api
+    beerImg.setAttribute("src", beerBatch[i].image_url); //fill with image_url from api
     beerImg.setAttribute("alt", "img not found");
+    //append beerItem and its children
+    beerBox.appendChild(beerItem);
+    beerItem.appendChild(beerName);
+    beerItem.appendChild(beerTagLine);
+    beerItem.appendChild(beerDate);
+    beerItem.appendChild(beerImg);
   }
 }
 addBeer();
