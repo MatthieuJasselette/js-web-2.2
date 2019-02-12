@@ -13,7 +13,7 @@ import axios from 'axios';
 
 let getBeer = async () => {
   try {
-    let importBeer = await axios.get('https://api.punkapi.com/v2/beers')
+    let importBeer = await axios.get('https://api.punkapi.com/v2/beers/')
     console.log("control getBeer");
     return importBeer.data;
   } catch (error) {
@@ -24,25 +24,32 @@ let getBeer = async () => {
 let addBeer = async () => {
   let beerBatch = await getBeer();
   let beerBox = document.getElementById("beerCase");
-  for (let i = 0 ;  i < 5 ; i++){
+  for (let i = 0 ;  i < 12; i++){
     //create beerItem and its children
     let beerItem = document.createElement("div");
     beerItem.setAttribute("class", "beerTag");
+    let beerInfo = document.createElement("div");
+    beerInfo.setAttribute("class", "beerInfo");
+    let beerPicture = document.createElement("div");
+    beerPicture.setAttribute("class", "beerPicture");
     let beerName = document.createElement("h5");
-    beerName.innerText = beerBatch[i].name; // fill with name from api
+    beerName.innerText = beerBatch[i].name;
     let beerTagLine = document.createElement ("p");
-    beerTagLine.innerText = beerBatch[i].tagline; // fill with tagline from api
+    beerTagLine.innerText = beerBatch[i].tagline;
     let beerDate =  document.createElement("p");
-    beerDate.innerText = beerBatch[i].first_brewed; // fill with first_brewed from api
+    beerDate.innerText = beerBatch[i].first_brewed;
     let beerImg =  document.createElement("img");
-    beerImg.setAttribute("src", beerBatch[i].image_url); //fill with image_url from api
+    beerImg.setAttribute("src", beerBatch[i].image_url);
     beerImg.setAttribute("alt", "img not found");
+    beerImg.setAttribute("class", "beerImg")
     //append beerItem and its children
     beerBox.appendChild(beerItem);
-    beerItem.appendChild(beerName);
-    beerItem.appendChild(beerTagLine);
-    beerItem.appendChild(beerDate);
-    beerItem.appendChild(beerImg);
+    beerItem.appendChild(beerInfo);
+    beerItem.appendChild(beerPicture);
+    beerInfo.appendChild(beerName);
+    beerInfo.appendChild(beerTagLine);
+    beerInfo.appendChild(beerDate);
+    beerPicture.appendChild(beerImg);
   }
 }
 addBeer();

@@ -8,3 +8,32 @@
   If you need some CSS for any reason you can put it here.
 */
 
+.beerCase {
+    display : flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.beerTag {
+  display: flex;
+  flex-direction: row;
+}
+
+.beerInfo {
+  height: auto;
+  width: 150px;
+  margin: 1px 1px;
+}
+
+.beerPicture {
+  height: 150px;
+  width: 150px;
+  margin: 1px 1px;
+}
+
+.beerImg {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
